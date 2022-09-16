@@ -1,0 +1,52 @@
+<ng-container *ngrxLet="gameState$ as gameState">
+  <button
+    class="btn btn-primary"
+    (click)="beginGame()"
+    [disabled]="gameState.started || gameState.ended"
+    [title]="gameState.ended ? 'Game Ended' : gameState.started ? 'Game Already Started' : ''"
+  >
+    <clr-icon shape="play"></clr-icon>
+    Begin
+  </button>
+  <button
+    class="btn btn-success"
+    [disabled]="!gameState.started || gameState.ended"
+    [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
+  >
+    <clr-icon shape="check"></clr-icon>
+    Correct
+  </button>
+  <button
+    class="btn btn-warning"
+    [disabled]="!gameState.started || gameState.ended"
+    [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
+  >
+    <clr-icon shape="redo"></clr-icon>
+    Skip
+  </button>
+  
+  <ng-container *ngrxLet="gameLetters$ as gameLetters">
+    <div class="clr-row" *ngIf="gameLetters.length">
+      <div class="clr-col-2 clr-col-sm-3 clr-col-md" *ngFor="let letter of gameLetters">
+        <div class="card">
+          <div class="card-block">
+            <h4 class="card-title">{{letter | uppercase}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+
+  <div *ngIf="gameState.started && !gameState.ended">
+    <!-- game info -->
+    <h1 *ngIf="timer$ | async as remainingTime">Remaining Time: {{remainingTime}}</h1>
+    <h1 *ngrxLet="currentWord$ as currentWord">
+      Current Word: {{currentWord}}
+    </h1>
+  </div>
+
+  <div *ngIf="gameState.ended">
+    <h1>Game Over!</h1>
+  </div>
+  
+</ng-container>
