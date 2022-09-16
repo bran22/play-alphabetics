@@ -1,11 +1,11 @@
-<button class="btn btn-success">
+<button class="btn btn-success" (click)="beginGame(gameLetters)">
   <clr-icon shape="play"></clr-icon>
   Begin
 </button>
-<button class="btn btn-outline">Help</button>
-<button class="btn btn-outline">About</button>
+<button class="btn btn-outline">Correct</button>
+<button class="btn btn-outline">Skip</button>
 
-<div class="clr-row" *ngIf="gameLetters">
+<div class="clr-row" *ngIf="gameLetters.length">
   <div class="clr-col-sm-3 clr-col-md-1" *ngFor="let letter of gameLetters">
     <div class="card">
       <div class="card-block">
@@ -14,3 +14,8 @@
     </div>
   </div>
 </div>
+
+<h1 *ngIf="timer$ | async as remainingTime else startTime">{{remainingTime}}</h1>
+<ng-template #startTime>
+  <h1>60</h1>
+</ng-template>

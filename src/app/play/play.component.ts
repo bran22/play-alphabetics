@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { BehaviorSubject, combineLatest, filter, interval, map, switchMap, take, timer } from 'rxjs';
+import { beginGameButtonClicked } from './play.actions';
+import { selectGameStarted } from './play.reducer';
 import { allWords, alphabet, Letter, WordList } from './words';
 
 const getGameLetters = (startingLetterIndex: number, alphabet: Letter[]) => alphabet.slice(startingLetterIndex, startingLetterIndex + 10);
@@ -15,10 +19,19 @@ const getGameWords = (gameLetters: Letter[], allWords: WordList): string[] => {
 })
 export class PlayComponent implements OnInit {
 
-  gameLetters: Letter[] | null = null;
-  gameWords: string[] | null = null;
+  gameLetters: Letter[] = [];
+  gameWords: string[] = [];
+  timer$ = this.store.select(selectGameStarted).pipe(
+    filter( startGame => startGame ),
+    switchMap( () => timer(0, 1000).pipe(
+      take(60)
+    )),
+    map( secondsElapsed => 59 - secondsElapsed )
+  );
 
-  constructor() { }
+  constructor(
+    private store: Store
+  ) { }
 
   ngOnInit(): void {
     const startingLetterIndex = Math.round(
@@ -28,7 +41,9 @@ export class PlayComponent implements OnInit {
   }
 
   beginGame(gameLetters: Letter[]) {
+    this.store.dispatch(beginGameButtonClicked());
     this.gameWords = getGameWords(gameLetters, allWords);
+    console.log('this.gamewords', this.gameWords);
   }
 
 }
