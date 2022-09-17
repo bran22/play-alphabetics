@@ -5,26 +5,23 @@
         class="btn btn-primary"
         (click)="beginGame()"
         [disabled]="gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : gameState.started ? 'Game Already Started' : ''"
-      >
+        [title]="gameState.ended ? 'Game Ended' : gameState.started ? 'Game Already Started' : ''">
         <clr-icon shape="play"></clr-icon>
         Begin
       </button>
       <button
         class="btn btn-success"
-        (click)="onCorrect()"
+        (click)="correct()"
         [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
-      >
+        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''">
         <clr-icon shape="check"></clr-icon>
         Correct
       </button>
       <button
         class="btn btn-warning"
-        (click)="onSkip()"
+        (click)="skip()"
         [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
-      >
+        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''">
         <clr-icon shape="redo"></clr-icon>
         Skip
       </button>
@@ -53,10 +50,34 @@
     </div>
   </ng-container>
 
-  <div class="clr-row" *ngIf="gameState.ended">
-    <div class="clr-col">
-      <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>
+  <ng-container *ngIf="gameState.ended">
+    <div class="clr-row">
+      <div class="clr-col">
+        <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>
+      </div>
     </div>
-  </div>
+
+    <div class="clr-row">
+      <div class="clr-col center-elements">
+        <button
+          class="btn btn-primary"
+          (click)="playAgain()">
+          <clr-icon shape="sync"></clr-icon>
+          Play Again
+        </button>
+      </div>
+    </div>
+
+    <div class="clr-row">
+      <div class="clr-col center-elements">
+        <button
+          class="btn btn-primary"
+          (click)="navigateHome()">
+          <clr-icon shape="home"></clr-icon>
+          Homepage
+        </button>
+      </div>
+    </div>
+  </ng-container>
 
 </ng-container>

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, finalize, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
-import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './store/game.ui.actions';
+import { beginGameButtonClicked, correctButtonClicked, playAgainButtonClicked, skipButtonClicked } from './store/game.ui.actions';
 import { selectGameEnded, selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';
 import { selectCurrentWord, selectGameLettersWithInfo } from './store/game.selectors';
 import { selectTimerLength } from '../settings/store/settings.reducer';
@@ -35,7 +36,8 @@ export class GameComponent implements OnInit {
   );
 
   constructor(
-    private store: Store
+    private store: Store,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,12 +48,20 @@ export class GameComponent implements OnInit {
     this.store.dispatch(beginGameButtonClicked());
   }
 
-  onCorrect(): void {
+  correct(): void {
     this.store.dispatch(correctButtonClicked());
   }
 
-  onSkip(): void {
+  skip(): void {
     this.store.dispatch(skipButtonClicked());
+  }
+
+  playAgain(): void {
+    this.store.dispatch(playAgainButtonClicked());
+  }
+
+  navigateHome(): void {
+    this.router.navigate(['./']);
   }
 
 }

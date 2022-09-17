@@ -4,7 +4,7 @@ import { filter, map, withLatestFrom } from 'rxjs';
 import { getGameLetters, getGameWords } from '../game.utils';
 import { gameComponentInitialized, gameEnded, gotGameLetters, gotGameWords, remainingWordIndicesGenerated } from './game.actions';
 import { allWords, alphabet } from '../words';
-import { correctButtonClicked } from './game.ui.actions';
+import { correctButtonClicked, playAgainButtonClicked } from './game.ui.actions';
 import { selectRemainingWordIndices } from './game.reducer';
 import { Store } from '@ngrx/store';
 import { selectNumWords } from 'src/app/settings/store/settings.reducer';
@@ -16,7 +16,7 @@ export class GameEffects {
 
   getRemainingWordIndices$ = createEffect(
     () => this.actions$.pipe(
-      ofType(gameComponentInitialized),
+      ofType(gameComponentInitialized, playAgainButtonClicked),
       withLatestFrom(this.store.select(selectNumWords)),
       map( ([_, numWords]) => range(numWords)),
       map( (remainingWordIndices) => remainingWordIndicesGenerated({remainingWordIndices}) )
@@ -25,7 +25,7 @@ export class GameEffects {
  
   getGameLetters$ = createEffect(
     () => this.actions$.pipe(
-      ofType(gameComponentInitialized),
+      ofType(gameComponentInitialized, playAgainButtonClicked),
       map( () => {
         const startingLetterIndex = Math.round(
           Math.random() * (alphabet.length - 10)

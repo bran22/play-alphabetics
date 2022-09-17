@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded } from './game.actions';
-import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './game.ui.actions';
+import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded, gameComponentInitialized } from './game.actions';
+import { beginGameButtonClicked, correctButtonClicked, playAgainButtonClicked, skipButtonClicked } from './game.ui.actions';
 import { Letter } from '../word.models';
 import { findNextRemainingIndex } from '../game.utils';
 
@@ -67,8 +67,15 @@ const incrementSkipCounter = (state: GameState) => ({
   skipCount: state.skipCount + 1
 });
 
+const resetGame = (state: GameState) => ({
+  ...state,
+  ...initialState
+});
+
 const gameStateReducer = createReducer(
   initialState,
+  on(gameComponentInitialized, resetGame),
+  on(playAgainButtonClicked, resetGame),
   on(beginGameButtonClicked, startGame),
   on(gameEnded, endGame),
   on(remainingWordIndicesGenerated, setRemainingWordIndices),
@@ -76,7 +83,7 @@ const gameStateReducer = createReducer(
   on(gotGameWords, setGameWords),
   on(correctButtonClicked, setWordCorrect),
   on(skipButtonClicked, incrementSkipCounter),
-  on(skipButtonClicked, skipWord)
+  on(skipButtonClicked, skipWord),
 );
 
 export const gameFeature = createFeature({
