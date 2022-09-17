@@ -10,7 +10,7 @@ export interface GameState {
   gameLetters: Letter[],
   gameWords: string[],
   remainingWordIndices: number[],
-  currentWordIndex: number,
+  currentWordIndex: number | null,
   skipCount: number,
 }
 
@@ -20,18 +20,20 @@ export const initialState: GameState = {
   gameLetters: [],
   gameWords: [],
   remainingWordIndices: [],
-  currentWordIndex: 0,
+  currentWordIndex: null,
   skipCount: 0,
 };
 
 const startGame = (state: GameState): GameState => ({
   ...state,
-  gameStarted: true
+  gameStarted: true,
+  currentWordIndex: 0
 });
 
 const endGame = (state: GameState): GameState => ({
   ...state,
-  gameEnded: true
+  gameEnded: true,
+  currentWordIndex: null
 });
 
 const setRemainingWordIndices = (state: GameState, {remainingWordIndices}: {remainingWordIndices: number[]}) => ({

@@ -10,9 +10,9 @@ export const getGameWords = (gameLetters: Letter[], allWords: WordList): string[
     .map( getRandomWord );
 };
 
-export const findNextRemainingIndex = (remainingIndices: number[], currentIndex: number) => {
-  if (remainingIndices.length === 0) {
-    return 0;
+export const findNextRemainingIndex = (remainingIndices: number[], currentIndex: number | null) => {
+  if (currentIndex === null || remainingIndices.length === 0) {
+    return null;
   } else if (currentIndex >= Math.max(...remainingIndices)) {
     // wrap around if we've exceeded the max
     return remainingIndices[0];
