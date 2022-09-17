@@ -50,6 +50,10 @@
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "src/app/_extra-modules/index.ts",
+                  "with": "src/app/_extra-modules/index.prod.ts"
                 }
               ],
               "outputHashing": "all"
