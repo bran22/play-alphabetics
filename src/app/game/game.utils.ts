@@ -1,4 +1,4 @@
-import { Letter, WordList } from './words';
+import { Letter, WordList } from './word.models';
 
 export const getGameLetters = (startingLetterIndex: number, alphabet: Letter[]) => alphabet.slice(startingLetterIndex, startingLetterIndex + 10);
 

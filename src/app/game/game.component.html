@@ -27,10 +27,10 @@
     Skip
   </button>
   
-  <ng-container *ngrxLet="gameLetters$ as gameLetters">
-    <div class="clr-row" *ngIf="gameLetters.length">
-      <div class="clr-col-2 clr-col-sm-3 clr-col-md" *ngFor="let letter of gameLetters">
-        <app-letter-card [letter]="letter"></app-letter-card>
+  <ng-container *ngrxLet="gameLetters$ as letters">
+    <div class="clr-row" *ngIf="letters.length">
+      <div class="clr-col-2 clr-col-sm-3 clr-col-md" *ngFor="let letter of letters">
+        <app-letter-card [letterInfo]="letter"></app-letter-card>
       </div>
     </div>
   </ng-container>

@@ -3,8 +3,8 @@ import { Store } from '@ngrx/store';
 import { combineLatest, filter, finalize, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
 import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './store/game.ui.actions';
-import { selectGameEnded, selectGameLetters, selectGameStarted, selectGameWords } from './store/game.reducer';
-import { selectCurrentWord } from './store/game.selectors';
+import { selectGameEnded, selectGameStarted, selectGameWords } from './store/game.reducer';
+import { selectCurrentWord, selectGameLettersWithInfo } from './store/game.selectors';
 import { selectTimerLength } from '../settings/store/settings.reducer';
 
 @Component({
@@ -20,7 +20,7 @@ export class GameComponent implements OnInit {
   ]).pipe(
     map( ([started, ended]) => ({started, ended}) )
   );
-  gameLetters$ = this.store.select(selectGameLetters);
+  gameLetters$ = this.store.select(selectGameLettersWithInfo);
   gameWords$ = this.store.select(selectGameWords);
   timer$ = this.store.select(selectGameStarted).pipe(
     filter( startGame => startGame ),

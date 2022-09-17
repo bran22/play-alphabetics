@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Letter } from '../words';
+import { Letter } from '../word.models';
 
 export const gameComponentInitialized = createAction(
   '[Game Component] Component Initialized'

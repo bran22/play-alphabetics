@@ -1,7 +1,7 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded } from './game.actions';
 import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './game.ui.actions';
-import { Letter } from '../words';
+import { Letter } from '../word.models';
 import { findNextRemainingIndex } from '../game.utils';
 
 export interface GameState {
