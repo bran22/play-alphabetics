@@ -1,4 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { gameLengthInputChanged, numWordsInputChanged } from './settings.actions';
 
 
 export interface SettingsState {
@@ -11,8 +12,20 @@ export const initialState: SettingsState = {
   timerLength: 60
 };
 
+const setNumWords = (state: SettingsState, {numWords}: {numWords: number}) => ({
+  ...state,
+  numWords
+});
+
+const setTimerLength = (state: SettingsState, {timerLength}: {timerLength: number}) => ({
+  ...state,
+  timerLength
+});
+
 const settingsStateReducer = createReducer(
   initialState,
+  on(numWordsInputChanged, setNumWords),
+  on(gameLengthInputChanged, setTimerLength)
 );
 
 export const settingsFeature = createFeature({

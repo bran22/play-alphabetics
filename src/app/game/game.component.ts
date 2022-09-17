@@ -61,7 +61,7 @@ export class GameComponent implements OnInit {
   }
 
   navigateHome(): void {
-    this.router.navigate(['./']);
+    this.router.navigate(['/']);
   }
 
 }
