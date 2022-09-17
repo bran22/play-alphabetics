@@ -8,7 +8,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './store/game.effects';
 import { LetterCardModule } from '../components/letter-card/letter-card.module';
 import { ClarityModule } from '@clr/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -16,7 +15,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   ],
   imports: [
     CommonModule,
-    BrowserAnimationsModule,
     ClarityModule,
     LetModule,
     StoreModule.forFeature(gameFeature),

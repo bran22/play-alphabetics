@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, finalize, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
+import { combineLatest, filter, finalize, map, switchMap, take, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
 import { beginGameButtonClicked, correctButtonClicked, playAgainButtonClicked, skipButtonClicked } from './store/game.ui.actions';
 import { selectGameEnded, selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';

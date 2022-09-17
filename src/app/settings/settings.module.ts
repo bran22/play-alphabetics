@@ -4,7 +4,6 @@ import { SettingsComponent } from './settings.component';
 import { StoreModule } from '@ngrx/store';
 import { settingsFeature } from './store/settings.reducer';
 import { ClarityModule } from '@clr/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RestrictNumericDirective } from '../shared/restrict-numeric.directive';
 import { FormsModule } from '@angular/forms';
 
@@ -16,7 +15,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    BrowserAnimationsModule,
     ClarityModule,
     StoreModule.forFeature(settingsFeature),
     // EffectsModule.forFeature([]),
