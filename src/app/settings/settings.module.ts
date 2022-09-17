@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { SettingsComponent } from './settings.component';
 import { StoreModule } from '@ngrx/store';
 import { settingsFeature } from './store/settings.reducer';
+import { ClarityModule } from '@clr/angular';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -10,6 +12,8 @@ import { settingsFeature } from './store/settings.reducer';
   ],
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
+    ClarityModule,
     StoreModule.forFeature(settingsFeature),
     // EffectsModule.forFeature([]),
   ]

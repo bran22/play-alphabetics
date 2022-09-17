@@ -12,8 +12,12 @@ export class HomeComponent {
     private router: Router
   ) { }
 
-  newGameClicked() {
+  startNewGame() {
     this.router.navigate(['/play']);
+  }
+
+  navigateToSettings(): void {
+    this.router.navigate(['/settings']);
   }
 
 }
