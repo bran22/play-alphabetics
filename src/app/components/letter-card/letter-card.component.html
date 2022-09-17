@@ -1,5 +1,6 @@
 <div class="card" [class.success]="letterInfo?.correct">
   <div class="card-block">
-    <h3 class="card-title">{{letterInfo?.letter | uppercase}}</h3>
+    <h3 class="card-title" *ngIf="!letterInfo?.correct">{{letterInfo?.letter | uppercase}}</h3>
+    <clr-icon shape="check" size="24" class="is-success is-inverse" *ngIf="letterInfo?.correct"></clr-icon>
   </div>
 </div>
