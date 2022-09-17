@@ -2,12 +2,11 @@
   <div class="clr-row">
     <div class="clr-col center-elements">
       <button
-        class="btn btn-primary"
-        (click)="beginGame()"
-        [disabled]="gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : gameState.started ? 'Game Already Started' : ''">
-        <clr-icon shape="play"></clr-icon>
-        Begin
+        class="btn btn-outline"
+        (click)="navigateHome()"
+        [disabled]="gameState.started && !gameState.ended">
+        <clr-icon shape="home"></clr-icon>
+        Home
       </button>
       <button
         class="btn btn-success"
@@ -32,6 +31,20 @@
     <div class="clr-row" *ngIf="letters.length">
       <div class="clr-col-4 clr-col-sm-3 clr-col-md" *ngFor="let letter of letters">
         <app-letter-card [letterInfo]="letter"></app-letter-card>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!gameState.started">
+    <br />
+    <div class="clr-row">
+      <div class="clr-col center-elements">
+        <button
+          class="btn btn-primary"
+          (click)="beginGame()">
+          <clr-icon shape="play"></clr-icon>
+          Start Game
+        </button>
       </div>
     </div>
   </ng-container>
@@ -64,17 +77,6 @@
           (click)="playAgain()">
           <clr-icon shape="sync"></clr-icon>
           Play Again
-        </button>
-      </div>
-    </div>
-
-    <div class="clr-row">
-      <div class="clr-col center-elements">
-        <button
-          class="btn btn-primary"
-          (click)="navigateHome()">
-          <clr-icon shape="home"></clr-icon>
-          Homepage
         </button>
       </div>
     </div>
