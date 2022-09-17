@@ -30,7 +30,7 @@
 
   <ng-container *ngrxLet="gameLetters$ as letters">
     <div class="clr-row" *ngIf="letters.length">
-      <div class="clr-col-2 clr-col-sm-3 clr-col-md" *ngFor="let letter of letters">
+      <div class="clr-col-4 clr-col-sm-3 clr-col-md" *ngFor="let letter of letters">
         <app-letter-card [letterInfo]="letter"></app-letter-card>
       </div>
     </div>
@@ -52,7 +52,7 @@
 
   <ng-container *ngIf="gameState.ended">
     <div class="clr-row">
-      <div class="clr-col">
+      <div class="clr-col center-elements">
         <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>
       </div>
     </div>
