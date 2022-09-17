@@ -13,12 +13,15 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { GameEffects } from './game/store/game.effects';
 import { LetModule } from '@ngrx/component';
+import { SettingsComponent } from './settings/settings.component';
+import { settingsFeature } from './settings/store/settings.reducer';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    GameComponent
+    GameComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -27,6 +30,7 @@ import { LetModule } from '@ngrx/component';
     ClarityModule,
     StoreModule.forRoot({}),
     StoreModule.forFeature(gameFeature),
+    StoreModule.forFeature(settingsFeature),
     StoreDevtoolsModule.instrument({
       maxAge: 50, // Retains last 25 states
       logOnly: environment.production, // Restrict extension to log-only mode

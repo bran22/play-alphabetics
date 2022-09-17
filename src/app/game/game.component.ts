@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, finalize, map, switchMap, take, tap, timer } from 'rxjs';
-import { beginGameButtonClicked, gameComponentInitialized, gameEnded } from './store/game.actions';
+import { combineLatest, filter, finalize, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
+import { gameComponentInitialized, gameEnded } from './store/game.actions';
+import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './store/game.ui.actions';
 import { selectGameEnded, selectGameLetters, selectGameStarted, selectGameWords } from './store/game.reducer';
 import { selectCurrentWord } from './store/game.selectors';
+import { selectTimerLength } from '../settings/store/settings.reducer';
 
 @Component({
   selector: 'app-game',
@@ -12,7 +14,6 @@ import { selectCurrentWord } from './store/game.selectors';
 })
 export class GameComponent implements OnInit {
 
-  timerLength = 5;
   gameState$ = combineLatest([
     this.store.select(selectGameStarted),
     this.store.select(selectGameEnded)
@@ -23,11 +24,12 @@ export class GameComponent implements OnInit {
   gameWords$ = this.store.select(selectGameWords);
   timer$ = this.store.select(selectGameStarted).pipe(
     filter( startGame => startGame ),
-    switchMap( () => timer(0, 1000).pipe(
-      take(this.timerLength + 1),
-      finalize( () => this.store.dispatch(gameEnded()))
+    withLatestFrom(this.store.select(selectTimerLength)),
+    switchMap( ([_, timerLength]) => timer(0, 1000).pipe(
+      take(timerLength + 1),
+      map( secondsElapsed => timerLength - secondsElapsed ),
+      finalize( () => this.store.dispatch(gameEnded()) )
     )),
-    map( secondsElapsed => this.timerLength - secondsElapsed )
   );
   currentWord$ = this.store.select(selectCurrentWord);
 
@@ -39,8 +41,16 @@ export class GameComponent implements OnInit {
     this.store.dispatch(gameComponentInitialized());
   }
 
-  beginGame() {
+  beginGame(): void {
     this.store.dispatch(beginGameButtonClicked());
+  }
+
+  onCorrect(): void {
+    this.store.dispatch(correctButtonClicked());
+  }
+
+  onSkip(): void {
+    this.store.dispatch(skipButtonClicked());
   }
 
 }

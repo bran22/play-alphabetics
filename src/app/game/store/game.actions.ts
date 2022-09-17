@@ -5,8 +5,9 @@ export const gameComponentInitialized = createAction(
   '[Game Component] Component Initialized'
 );
 
-export const beginGameButtonClicked = createAction(
-  '[Game Component] (Begin Game Button) Button Clicked'
+export const remainingWordIndicesGenerated = createAction(
+  '[Game Component] Generated Remaining Word Indices',
+  props<{remainingWordIndices: number[]}>()
 );
 
 export const gotGameLetters = createAction(

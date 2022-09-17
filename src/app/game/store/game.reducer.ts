@@ -1,14 +1,17 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { beginGameButtonClicked, gameComponentInitialized, gameEnded, gotGameLetters, gotGameWords } from './game.actions';
+import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded } from './game.actions';
+import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './game.ui.actions';
 import { Letter } from '../words';
+import { findNextRemainingIndex } from '../game.utils';
 
 export interface GameState {
   gameStarted: boolean,
   gameEnded: boolean,
   gameLetters: Letter[],
   gameWords: string[],
-  completedWordIndices: number[],
+  remainingWordIndices: number[],
   currentWordIndex: number,
+  skipCount: number,
 }
 
 export const initialState: GameState = {
@@ -16,8 +19,9 @@ export const initialState: GameState = {
   gameEnded: false,
   gameLetters: [],
   gameWords: [],
-  completedWordIndices: [],
+  remainingWordIndices: [],
   currentWordIndex: 0,
+  skipCount: 0,
 };
 
 const startGame = (state: GameState): GameState => ({
@@ -30,6 +34,11 @@ const endGame = (state: GameState): GameState => ({
   gameEnded: true
 });
 
+const setRemainingWordIndices = (state: GameState, {remainingWordIndices}: {remainingWordIndices: number[]}) => ({
+  ...state,
+  remainingWordIndices
+});
+
 const setGameLetters = (state: GameState, {gameLetters}: {gameLetters: Letter[]}) => ({
   ...state,
   gameLetters
@@ -40,16 +49,32 @@ const setGameWords = (state: GameState, {gameWords}: {gameWords: string[]}) => (
   gameWords
 });
 
-const advanceCurrentWord = (state: GameState) => ({
+const setWordCorrect = (state: GameState) => ({
   ...state,
+  currentWordIndex: findNextRemainingIndex(state.remainingWordIndices, state.currentWordIndex),
+  remainingWordIndices: state.remainingWordIndices.filter( (i: number) => i !== state.currentWordIndex ),
+});
+
+const skipWord = (state: GameState) => ({
+  ...state,
+  currentWordIndex: findNextRemainingIndex(state.remainingWordIndices, state.currentWordIndex),
+});
+
+const incrementSkipCounter = (state: GameState) => ({
+  ...state,
+  skipCount: state.skipCount + 1
 });
 
 const gameStateReducer = createReducer(
   initialState,
   on(beginGameButtonClicked, startGame),
   on(gameEnded, endGame),
+  on(remainingWordIndicesGenerated, setRemainingWordIndices),
   on(gotGameLetters, setGameLetters),
-  on(gotGameWords, setGameWords)
+  on(gotGameWords, setGameWords),
+  on(correctButtonClicked, setWordCorrect),
+  on(skipButtonClicked, incrementSkipCounter),
+  on(skipButtonClicked, skipWord)
 );
 
 export const gameFeature = createFeature({
@@ -65,5 +90,6 @@ export const {
   selectGameEnded,
   selectGameLetters,
   selectGameWords,
-  selectCurrentWordIndex
+  selectCurrentWordIndex,
+  selectRemainingWordIndices
 } = gameFeature;

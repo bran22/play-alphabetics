@@ -1,12 +1,27 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { map } from 'rxjs';
+import { filter, map, withLatestFrom } from 'rxjs';
 import { getGameLetters, getGameWords } from '../game.utils';
-import { gameComponentInitialized, beginGameButtonClicked, gotGameLetters, gotGameWords } from './game.actions';
+import { gameComponentInitialized, gameEnded, gotGameLetters, gotGameWords, remainingWordIndicesGenerated } from './game.actions';
 import { allWords, alphabet } from '../words';
- 
+import { correctButtonClicked } from './game.ui.actions';
+import { selectRemainingWordIndices } from './game.reducer';
+import { Store } from '@ngrx/store';
+import { selectNumWords } from 'src/app/settings/store/settings.reducer';
+
+const range = (num: number) => [...Array(num).keys()];
+
 @Injectable()
 export class GameEffects {
+
+  getRemainingWordIndices$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(gameComponentInitialized),
+      withLatestFrom(this.store.select(selectNumWords)),
+      map( ([_, numWords]) => range(numWords)),
+      map( (remainingWordIndices) => remainingWordIndicesGenerated({remainingWordIndices}) )
+    )
+  );
  
   getGameLetters$ = createEffect(
     () => this.actions$.pipe(
@@ -28,8 +43,18 @@ export class GameEffects {
       map( (gameWords) => gotGameWords({gameWords}) )
     )
   );
+
+  advanceCurrentWord$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(correctButtonClicked),
+      withLatestFrom(this.store.select(selectRemainingWordIndices)),
+      filter( ([_, remaining]) => remaining.length === 0),
+      map( () => gameEnded() )
+    )
+  );
  
   constructor(
     private actions$: Actions,
+    private store: Store
   ) {}
 }

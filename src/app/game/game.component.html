@@ -10,6 +10,7 @@
   </button>
   <button
     class="btn btn-success"
+    (click)="onCorrect()"
     [disabled]="!gameState.started || gameState.ended"
     [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
   >
@@ -18,6 +19,7 @@
   </button>
   <button
     class="btn btn-warning"
+    (click)="onSkip()"
     [disabled]="!gameState.started || gameState.ended"
     [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''"
   >
