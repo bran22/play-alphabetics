@@ -55,7 +55,7 @@
 
   <div class="clr-row" *ngIf="gameState.ended">
     <div class="clr-col">
-      <h1 class="center-text">Game Over!</h1>
+      <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>
     </div>
   </div>
 

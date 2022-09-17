@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, filter, finalize, map, switchMap, take, tap, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
 import { beginGameButtonClicked, correctButtonClicked, skipButtonClicked } from './store/game.ui.actions';
-import { selectGameEnded, selectGameStarted, selectGameWords } from './store/game.reducer';
+import { selectGameEnded, selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';
 import { selectCurrentWord, selectGameLettersWithInfo } from './store/game.selectors';
 import { selectTimerLength } from '../settings/store/settings.reducer';
 
@@ -22,6 +22,8 @@ export class GameComponent implements OnInit {
   );
   gameLetters$ = this.store.select(selectGameLettersWithInfo);
   gameWords$ = this.store.select(selectGameWords);
+  currentWord$ = this.store.select(selectCurrentWord);
+  remainingIndices$ = this.store.select(selectRemainingWordIndices);
   timer$ = this.store.select(selectGameStarted).pipe(
     filter( startGame => startGame ),
     withLatestFrom(this.store.select(selectTimerLength)),
@@ -31,7 +33,6 @@ export class GameComponent implements OnInit {
       finalize( () => this.store.dispatch(gameEnded()) )
     )),
   );
-  currentWord$ = this.store.select(selectCurrentWord);
 
   constructor(
     private store: Store
