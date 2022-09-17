@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { environment } from 'src/environments/environment';
 import { AppComponent } from './app.component';
@@ -9,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
 import { GameModule } from './game/game.module';
 import { SettingsModule } from './settings/settings.module';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { SettingsModule } from './settings/settings.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
+    ClarityModule,
     StoreModule.forRoot({}),
     StoreDevtoolsModule.instrument({
       maxAge: 50, // Retains last 25 states

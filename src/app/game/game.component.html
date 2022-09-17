@@ -30,11 +30,7 @@
   <ng-container *ngrxLet="gameLetters$ as gameLetters">
     <div class="clr-row" *ngIf="gameLetters.length">
       <div class="clr-col-2 clr-col-sm-3 clr-col-md" *ngFor="let letter of gameLetters">
-        <div class="card">
-          <div class="card-block">
-            <h4 class="card-title">{{letter | uppercase}}</h4>
-          </div>
-        </div>
+        <app-letter-card [letter]="letter"></app-letter-card>
       </div>
     </div>
   </ng-container>
