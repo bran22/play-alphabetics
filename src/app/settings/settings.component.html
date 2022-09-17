@@ -1,12 +1,12 @@
 <form clrForm clrLayout="vertical" class="center-text">
   <clr-input-container>
     <label class="clr-col-12">Number of Words</label>
-    <input clrInput class="clr-col-12" type="number" [value]="numWords$ | async" />
+    <input clrInput class="clr-col-12" type="number" [value]="numWords$ | async" appRestrictNumeric />
   </clr-input-container>
 
   <clr-input-container>
     <label class="clr-col-12">Game Duration (sec)</label>
-    <input clrInput class="clr-col-12" type="number" [value]="gameLength$ | async" />
+    <input clrInput class="clr-col-12" type="number" [value]="gameLength$ | async" appRestrictNumeric />
   </clr-input-container>
 
   <br />

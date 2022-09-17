@@ -5,10 +5,12 @@ import { StoreModule } from '@ngrx/store';
 import { settingsFeature } from './store/settings.reducer';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RestrictNumericDirective } from '../shared/restrict-numeric.directive';
 
 @NgModule({
   declarations: [
-    SettingsComponent
+    SettingsComponent,
+    RestrictNumericDirective
   ],
   imports: [
     CommonModule,
