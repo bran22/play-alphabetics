@@ -5,3 +5,13 @@
 .success {
   background-color: var(--clr-color-success-700);
 }
+
+.current {
+  box-shadow: 3px 3px;
+  animation: pulse-shadow 0.5s alternate infinite ease-in-out;
+}
+
+@keyframes pulse-shadow {
+  from {box-shadow: 3px 3px;}
+  to {box-shadow: 1px 1px;}
+}
