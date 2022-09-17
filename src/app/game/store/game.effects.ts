@@ -8,8 +8,7 @@ import { correctButtonClicked, playAgainButtonClicked } from './game.ui.actions'
 import { selectRemainingWordIndices } from './game.reducer';
 import { Store } from '@ngrx/store';
 import { selectNumWords } from 'src/app/settings/store/settings.reducer';
-
-const range = (num: number) => [...Array(num).keys()];
+import { range } from 'src/app/shared/utils';
 
 @Injectable()
 export class GameEffects {

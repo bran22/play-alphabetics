@@ -12,18 +12,15 @@
       <clr-control-error>Must be between {{numWordsPlaceholder}}</clr-control-error>
   </clr-input-container>
 
-  <clr-input-container>
+  <clr-select-container>
     <label class="clr-col-12">Game Duration (sec)</label>
-    <input #gl clrInput class="clr-col-12" type="number"
-      [min]="gameLengthRange.min"
-      [max]="gameLengthRange.max"
-      [placeholder]="gameLengthPlaceholder"
+    <select #gl clrSelect class="clr-col-12"
       [ngModel]="gameLength$ | async"
       [ngModelOptions]="{standalone: true}"
-      (change)="storeGameLength(gl.value)"
-      appRestrictNumeric />
-    <clr-control-error>Must be between {{gameLengthPlaceholder}}</clr-control-error>
-  </clr-input-container>
+      (change)="storeGameLength(gl.value)">
+      <option *ngFor="let time of timeOptions" [value]="time">{{time}}</option>
+    </select>
+  </clr-select-container>
 
   <br />
   <button class="btn btn-outline" (click)="navigateHome()">Back</button>

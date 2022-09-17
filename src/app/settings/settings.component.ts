@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { range } from '../shared/utils';
 import { gameLengthInputChanged, numWordsInputChanged } from './store/settings.actions';
 import { selectNumWords, selectTimerLength } from './store/settings.reducer';
 
@@ -14,9 +15,8 @@ export class SettingsComponent {
   numWords$ = this.store.select(selectNumWords);
   gameLength$ = this.store.select(selectTimerLength);
   numWordsRange = {min: 1, max: 26};
-  gameLengthRange = {min: 10, max: 600};
   numWordsPlaceholder = `${this.numWordsRange.min} - ${this.numWordsRange.max}`;
-  gameLengthPlaceholder = `${this.gameLengthRange.min} - ${this.gameLengthRange.max}`;
+  timeOptions = range(12).map( x => (x + 1) * 15 );
 
   constructor(
     private store: Store,
@@ -30,9 +30,7 @@ export class SettingsComponent {
   }
 
   storeGameLength(value: string): void {
-    if (+value <= this.gameLengthRange.max && +value >= this.gameLengthRange.min) {
-      this.store.dispatch(gameLengthInputChanged({timerLength: +value}));
-    } 
+    this.store.dispatch(gameLengthInputChanged({timerLength: +value}));
   }
 
   navigateHome(): void {
