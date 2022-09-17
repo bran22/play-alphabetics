@@ -6,6 +6,7 @@ import { settingsFeature } from './store/settings.reducer';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RestrictNumericDirective } from '../shared/restrict-numeric.directive';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { RestrictNumericDirective } from '../shared/restrict-numeric.directive';
   ],
   imports: [
     CommonModule,
+    FormsModule,
     BrowserAnimationsModule,
     ClarityModule,
     StoreModule.forFeature(settingsFeature),

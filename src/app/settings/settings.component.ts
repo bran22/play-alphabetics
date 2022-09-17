@@ -13,6 +13,10 @@ export class SettingsComponent {
 
   numWords$ = this.store.select(selectNumWords);
   gameLength$ = this.store.select(selectTimerLength);
+  numWordsRange = {min: 1, max: 26};
+  gameLengthRange = {min: 10, max: 600};
+  numWordsPlaceholder = `${this.numWordsRange.min} - ${this.numWordsRange.max}`;
+  gameLengthPlaceholder = `${this.gameLengthRange.min} - ${this.gameLengthRange.max}`;
 
   constructor(
     private store: Store,
@@ -20,13 +24,15 @@ export class SettingsComponent {
   ) { }
 
   storeNumWords(value: string): void {
-    const numWords = value ? +value : 1;
-    this.store.dispatch(numWordsInputChanged({numWords}));
+    if (+value <= this.numWordsRange.max && +value >= this.numWordsRange.min) {
+      this.store.dispatch(numWordsInputChanged({numWords: +value}));
+    }
   }
 
   storeGameLength(value: string): void {
-    const timerLength = value ? +value : 1;
-    this.store.dispatch(gameLengthInputChanged({timerLength}));
+    if (+value <= this.gameLengthRange.max && +value >= this.gameLengthRange.min) {
+      this.store.dispatch(gameLengthInputChanged({timerLength: +value}));
+    } 
   }
 
   navigateHome(): void {

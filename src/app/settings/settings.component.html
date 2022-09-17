@@ -1,12 +1,28 @@
 <form clrForm clrLayout="vertical" class="center-text">
   <clr-input-container>
     <label class="clr-col-12">Number of Words</label>
-    <input #nw clrInput class="clr-col-12" type="number" min="1" [value]="numWords$ | async" (blur)="storeNumWords(nw.value)" appRestrictNumeric />
+    <input #nw clrInput class="clr-col-12" type="number"
+      [min]="numWordsRange.min"
+      [max]="numWordsRange.max"
+      [placeholder]="numWordsPlaceholder"
+      [ngModel]="numWords$ | async"
+      [ngModelOptions]="{standalone: true}"
+      (blur)="storeNumWords(nw.value)"
+      appRestrictNumeric />
+      <clr-control-error>Must be between {{numWordsPlaceholder}}</clr-control-error>
   </clr-input-container>
 
   <clr-input-container>
     <label class="clr-col-12">Game Duration (sec)</label>
-    <input #gl clrInput class="clr-col-12" type="number" min="1" [value]="gameLength$ | async" (blur)="storeGameLength(gl.value)" appRestrictNumeric />
+    <input #gl clrInput class="clr-col-12" type="number"
+      [min]="gameLengthRange.min"
+      [max]="gameLengthRange.max"
+      [placeholder]="gameLengthPlaceholder"
+      [ngModel]="gameLength$ | async"
+      [ngModelOptions]="{standalone: true}"
+      (blur)="storeGameLength(gl.value)"
+      appRestrictNumeric />
+    <clr-control-error>Must be between {{gameLengthPlaceholder}}</clr-control-error>
   </clr-input-container>
 
   <br />
