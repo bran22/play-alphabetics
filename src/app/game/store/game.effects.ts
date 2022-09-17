@@ -26,11 +26,12 @@ export class GameEffects {
   getGameLetters$ = createEffect(
     () => this.actions$.pipe(
       ofType(gameComponentInitialized, playAgainButtonClicked),
-      map( () => {
+      withLatestFrom(this.store.select(selectNumWords)),
+      map( ([_, numWords]) => {
         const startingLetterIndex = Math.round(
-          Math.random() * (alphabet.length - 10)
+          Math.random() * (alphabet.length - numWords)
         );
-        return getGameLetters(startingLetterIndex, alphabet);
+        return getGameLetters(numWords, startingLetterIndex, alphabet);
       }),
       map( (gameLetters) => gotGameLetters({gameLetters}) )
     )

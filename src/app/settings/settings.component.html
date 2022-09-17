@@ -7,7 +7,7 @@
       [placeholder]="numWordsPlaceholder"
       [ngModel]="numWords$ | async"
       [ngModelOptions]="{standalone: true}"
-      (blur)="storeNumWords(nw.value)"
+      (change)="storeNumWords(nw.value)"
       appRestrictNumeric />
       <clr-control-error>Must be between {{numWordsPlaceholder}}</clr-control-error>
   </clr-input-container>
@@ -20,7 +20,7 @@
       [placeholder]="gameLengthPlaceholder"
       [ngModel]="gameLength$ | async"
       [ngModelOptions]="{standalone: true}"
-      (blur)="storeGameLength(gl.value)"
+      (change)="storeGameLength(gl.value)"
       appRestrictNumeric />
     <clr-control-error>Must be between {{gameLengthPlaceholder}}</clr-control-error>
   </clr-input-container>
