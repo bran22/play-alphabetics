@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, finalize, map, switchMap, take, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
-import { beginGameButtonClicked, correctButtonClicked, playAgainButtonClicked, skipButtonClicked } from './store/game.ui.actions';
+import { beginGameButtonClicked, correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked, skipButtonClicked } from './store/game.ui.actions';
 import { selectGameEnded, selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';
 import { selectCurrentWord, selectGameLettersWithInfo } from './store/game.selectors';
 import { selectTimerLength } from '../settings/store/settings.reducer';
@@ -57,7 +57,7 @@ export class GameComponent implements OnInit {
   }
 
   penalize(): void {
-    // this.store.dispatch(correctButtonClicked());
+    this.store.dispatch(penalizeButtonClicked());
   }
 
   playAgain(): void {

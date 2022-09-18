@@ -1,6 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded, gameComponentInitialized } from './game.actions';
-import { beginGameButtonClicked, correctButtonClicked, playAgainButtonClicked, skipButtonClicked } from './game.ui.actions';
+import { beginGameButtonClicked, correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked, skipButtonClicked } from './game.ui.actions';
 import { Letter } from '../word.models';
 import { findNextRemainingIndex } from '../game.utils';
 
@@ -10,6 +10,7 @@ export interface GameState {
   gameLetters: Letter[],
   gameWords: string[],
   remainingWordIndices: number[],
+  invalidWordIndices: number[],
   currentWordIndex: number | null,
   skipCount: number,
 }
@@ -20,6 +21,7 @@ export const initialState: GameState = {
   gameLetters: [],
   gameWords: [],
   remainingWordIndices: [],
+  invalidWordIndices: [],
   currentWordIndex: null,
   skipCount: 0,
 };
@@ -57,6 +59,13 @@ const setWordCorrect = (state: GameState) => ({
   remainingWordIndices: state.remainingWordIndices.filter( (i: number) => i !== state.currentWordIndex ),
 });
 
+const setWordInvalid = (state: GameState) => ({
+  ...state,
+  currentWordIndex: findNextRemainingIndex(state.remainingWordIndices, state.currentWordIndex),
+  invalidWordIndices: state.currentWordIndex !== null ? [...state.invalidWordIndices, state.currentWordIndex] : state.invalidWordIndices,
+  remainingWordIndices: state.remainingWordIndices.filter( (i: number) => i !== state.currentWordIndex ),
+});
+
 const skipWord = (state: GameState) => ({
   ...state,
   currentWordIndex: findNextRemainingIndex(state.remainingWordIndices, state.currentWordIndex),
@@ -82,6 +91,7 @@ const gameStateReducer = createReducer(
   on(gotGameLetters, setGameLetters),
   on(gotGameWords, setGameWords),
   on(correctButtonClicked, setWordCorrect),
+  on(penalizeButtonClicked, setWordInvalid),
   on(skipButtonClicked, incrementSkipCounter),
   on(skipButtonClicked, skipWord),
 );
@@ -100,5 +110,6 @@ export const {
   selectGameLetters,
   selectGameWords,
   selectCurrentWordIndex,
-  selectRemainingWordIndices
+  selectRemainingWordIndices,
+  selectInvalidWordIndices,
 } = gameFeature;

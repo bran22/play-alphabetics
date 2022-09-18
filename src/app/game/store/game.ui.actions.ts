@@ -12,6 +12,10 @@ export const skipButtonClicked = createAction(
   '[Game Component] (Skip Button) Clicked'
 );
 
+export const penalizeButtonClicked = createAction(
+  '[Game Component] (Penalize Button) Clicked'
+);
+
 export const playAgainButtonClicked = createAction(
   '[Game Component] (Play Again Button) Clicked'
 );

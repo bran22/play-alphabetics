@@ -8,5 +8,6 @@ export type WordList = {
 export interface LetterInfo {
   letter: Letter,
   correct: boolean,
-  current: boolean
+  current: boolean,
+  invalid: boolean,
 };

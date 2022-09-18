@@ -1,6 +1,11 @@
-<div class="card" [class.success]="letterInfo?.correct" [class.current]="letterInfo?.current">
+<div
+  class="card"
+  [class.success]="letterInfo?.correct"
+  [class.current]="letterInfo?.current"
+  [class.invalid]="letterInfo?.invalid">
   <div class="card-block">
-    <h3 class="card-title" *ngIf="!letterInfo?.correct">{{letterInfo?.letter | uppercase}}</h3>
+    <h3 class="card-title" *ngIf="!letterInfo?.correct && !letterInfo?.invalid">{{letterInfo?.letter | uppercase}}</h3>
     <clr-icon shape="check" size="24" class="is-success is-inverse" *ngIf="letterInfo?.correct"></clr-icon>
+    <clr-icon shape="times" size="24" class="is-success is-inverse" *ngIf="letterInfo?.invalid"></clr-icon>
   </div>
 </div>
