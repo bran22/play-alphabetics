@@ -6,23 +6,31 @@
         (click)="navigateHome()"
         [disabled]="gameState.started && !gameState.ended">
         <clr-icon shape="home"></clr-icon>
-        Home
+        <span class="button-text">&nbsp;Home</span>
       </button>
       <button
         class="btn btn-success"
         (click)="correct()"
         [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''">
+        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Mark word as correct'">
         <clr-icon shape="check"></clr-icon>
-        Correct
+        <span class="button-text">&nbsp;Correct</span>
       </button>
       <button
-        class="btn btn-warning"
+        class="btn btn-skip"
         (click)="skip()"
         [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : ''">
+        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Skip word'">
         <clr-icon shape="redo"></clr-icon>
-        Skip
+        <span class="button-text">&nbsp;Skip</span>
+      </button>
+      <button
+        class="btn btn-danger"
+        (click)="penalize()"
+        [disabled]="!gameState.started || gameState.ended"
+        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Penalize an invalid clue'">
+        <clr-icon shape="times"></clr-icon>
+        <span class="button-text">&nbsp;Invalid</span>
       </button>
     </div>
   </div>

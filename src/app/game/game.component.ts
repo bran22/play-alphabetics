@@ -56,6 +56,10 @@ export class GameComponent implements OnInit {
     this.store.dispatch(skipButtonClicked());
   }
 
+  penalize(): void {
+    // this.store.dispatch(correctButtonClicked());
+  }
+
   playAgain(): void {
     this.store.dispatch(playAgainButtonClicked());
   }

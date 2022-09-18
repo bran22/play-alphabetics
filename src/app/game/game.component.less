@@ -1,0 +1,28 @@
+.btn-skip {
+  color: var(--clr-color-neutral-0, white);
+  background-color: var(--clr-color-secondary-action-700);
+  border-color: var(--clr-color-secondary-action-700);
+  clr-icon {
+    color: var(--clr-color-neutral-0, white);
+  }
+}
+
+.btn-skip:hover {
+  background-color: var(--clr-color-secondary-action-800);
+}
+
+.btn-skip:active {
+  box-shadow: 0 .1rem 0 0 var(--clr-color-secondary-action-900) inset;
+}
+
+.btn-skip:disabled {
+  color: var(--clr-color-neutral-700);
+  background-color: var(--clr-color-neutral-400);
+  border-color: var(--clr-color-neutral-400);
+}
+
+@media screen and (max-width: 576px) {
+  span.button-text {
+    display: none;
+  }
+}
