@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, finalize, map, switchMap, take, timer, withLatestFrom } from 'rxjs';
+import { filter, finalize, map, switchMap, take, timer, withLatestFrom } from 'rxjs';
 import { gameComponentInitialized, gameEnded } from './store/game.actions';
-import { beginGameButtonClicked, correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked, skipButtonClicked } from './store/game.ui.actions';
-import { selectGameEnded, selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';
-import { selectCurrentWord, selectGameLettersWithInfo } from './store/game.selectors';
+import { beginGameButtonClicked, playAgainButtonClicked } from './store/game.ui.actions';
+import { selectGameStarted, selectGameWords, selectRemainingWordIndices } from './store/game.reducer';
+import { selectCurrentWord, selectGameLettersWithInfo, selectGameStatus } from './store/game.selectors';
 import { selectTimerLength } from '../settings/store/settings.reducer';
 
 @Component({
@@ -15,12 +14,7 @@ import { selectTimerLength } from '../settings/store/settings.reducer';
 })
 export class GameComponent implements OnInit {
 
-  gameState$ = combineLatest([
-    this.store.select(selectGameStarted),
-    this.store.select(selectGameEnded)
-  ]).pipe(
-    map( ([started, ended]) => ({started, ended}) )
-  );
+  gameStatus$ = this.store.select(selectGameStatus);
   gameLetters$ = this.store.select(selectGameLettersWithInfo);
   gameWords$ = this.store.select(selectGameWords);
   currentWord$ = this.store.select(selectCurrentWord);
@@ -37,7 +31,6 @@ export class GameComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -48,24 +41,8 @@ export class GameComponent implements OnInit {
     this.store.dispatch(beginGameButtonClicked());
   }
 
-  correct(): void {
-    this.store.dispatch(correctButtonClicked());
-  }
-
-  skip(): void {
-    this.store.dispatch(skipButtonClicked());
-  }
-
-  penalize(): void {
-    this.store.dispatch(penalizeButtonClicked());
-  }
-
   playAgain(): void {
     this.store.dispatch(playAgainButtonClicked());
-  }
-
-  navigateHome(): void {
-    this.router.navigate(['/']);
   }
 
 }

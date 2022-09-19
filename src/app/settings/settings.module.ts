@@ -4,7 +4,7 @@ import { SettingsComponent } from './settings.component';
 import { StoreModule } from '@ngrx/store';
 import { settingsFeature } from './store/settings.reducer';
 import { ClarityModule } from '@clr/angular';
-import { RestrictNumericDirective } from '../shared/restrict-numeric.directive';
+import { RestrictNumericDirective } from '~shared/restrict-numeric.directive';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({

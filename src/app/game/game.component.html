@@ -1,39 +1,5 @@
-<ng-container *ngrxLet="gameState$ as gameState">  
-  <div class="clr-row">
-    <div class="clr-col center-elements">
-      <button
-        class="btn btn-outline"
-        (click)="navigateHome()"
-        [disabled]="gameState.started && !gameState.ended">
-        <clr-icon shape="home"></clr-icon>
-        <span class="button-text">&nbsp;Home</span>
-      </button>
-      <button
-        class="btn btn-success"
-        (click)="correct()"
-        [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Mark word as correct'">
-        <clr-icon shape="check"></clr-icon>
-        <span class="button-text">&nbsp;Correct</span>
-      </button>
-      <button
-        class="btn btn-skip"
-        (click)="skip()"
-        [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Skip word'">
-        <clr-icon shape="redo"></clr-icon>
-        <span class="button-text">&nbsp;Skip</span>
-      </button>
-      <button
-        class="btn btn-danger"
-        (click)="penalize()"
-        [disabled]="!gameState.started || gameState.ended"
-        [title]="gameState.ended ? 'Game Ended' : !gameState.started ? 'Game Not Started' : 'Penalize an invalid clue'">
-        <clr-icon shape="times"></clr-icon>
-        <span class="button-text">&nbsp;Invalid</span>
-      </button>
-    </div>
-  </div>
+<ng-container *ngrxLet="gameStatus$ as gameStatus">  
+  <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
 
   <ng-container *ngrxLet="gameLetters$ as letters">
     <div class="clr-row" *ngIf="letters.length">
@@ -43,7 +9,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="!gameState.started">
+  <ng-container *ngIf="!gameStatus.started">
     <br />
     <div class="clr-row">
       <div class="clr-col center-elements">
@@ -56,7 +22,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="gameState.started && !gameState.ended">
+  <ng-container *ngIf="gameStatus.started && !gameStatus.ended">
     <div class="clr-row" *ngrxLet="currentWord$ as currentWord">
       <div class="clr-col">
         <h1 class="center-text">Current Word: {{currentWord | uppercase}}</h1>
@@ -70,7 +36,7 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="gameState.ended">
+  <ng-container *ngIf="gameStatus.ended">
     <div class="clr-row">
       <div class="clr-col center-elements">
         <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { range } from '../shared/utils';
+import { range } from '~shared/utils';
 import { gameLengthInputChanged, numWordsInputChanged } from './store/settings.actions';
 import { selectNumWords, selectTimerLength } from './store/settings.reducer';
 

@@ -1,5 +1,10 @@
 import { Letter, WordList } from './word.models';
 
+export type GameStatus = {
+  started: boolean,
+  ended: boolean
+};
+
 export const getGameLetters = (numLetters: number, startingLetterIndex: number, alphabet: Letter[]) => alphabet.slice(startingLetterIndex, startingLetterIndex + numLetters);
 
 const getRandomWord = (words: string[]): string => words[Math.floor(Math.random() * words.length)];
