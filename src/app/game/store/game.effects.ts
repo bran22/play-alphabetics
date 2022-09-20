@@ -4,7 +4,7 @@ import { delay, filter, map, withLatestFrom } from 'rxjs';
 import { getGameLetters, getGameWords } from '../game.utils';
 import { gameComponentInitialized, gameEndedByCompletion, gameEndedByTime, gameTimerTick, gotGameLetters, gotGameWords, initializeRemainingTime, remainingWordIndicesGenerated, showGameResults } from './game.actions';
 import { allWords, alphabet } from '../words';
-import { correctButtonClicked, playAgainButtonClicked } from './game.ui.actions';
+import { correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked } from './game.ui.actions';
 import { selectRemainingTime, selectRemainingWordIndices } from './game.reducer';
 import { Store } from '@ngrx/store';
 import { selectNumWords, selectTimerLength } from 'src/app/settings/store/settings.reducer';
@@ -52,9 +52,9 @@ export class GameEffects {
     )
   );
 
-  advanceCurrentWord$ = createEffect(
+  endGameByCompletion$ = createEffect(
     () => this.actions$.pipe(
-      ofType(correctButtonClicked),
+      ofType(correctButtonClicked, penalizeButtonClicked),
       withLatestFrom(this.store.select(selectRemainingWordIndices)),
       filter( ([_, remaining]) => remaining.length === 0),
       map( () => gameEndedByCompletion() )
