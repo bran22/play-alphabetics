@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameComponentInitialized, initializeRemainingTime, gameTimerTick, gameEndedByTime, gameEndedByCompletion } from './game.actions';
+import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameComponentInitialized, initializeRemainingTime, gameTimerTick, gameEndedByTime, gameEndedByCompletion, showGameResults } from './game.actions';
 import { beginGameButtonClicked, correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked, skipButtonClicked } from './game.ui.actions';
 import { Letter } from '../word.models';
 import { findNextRemainingIndex } from '../game.utils';
@@ -7,6 +7,7 @@ import { findNextRemainingIndex } from '../game.utils';
 export interface GameState {
   gameStarted: boolean,
   gameEnded: boolean,
+  showGameResults: boolean,
   gameLetters: Letter[],
   gameWords: string[],
   remainingWordIndices: number[],
@@ -19,6 +20,7 @@ export interface GameState {
 export const initialState: GameState = {
   gameStarted: false,
   gameEnded: false,
+  showGameResults: false,
   gameLetters: [],
   gameWords: [],
   remainingWordIndices: [],
@@ -88,6 +90,11 @@ const incrementSkipCounter = (state: GameState) => ({
   skipCount: state.skipCount + 1
 });
 
+const setShowGameResults = (state: GameState) => ({
+  ...state,
+  showGameResults: true
+});
+
 const resetGame = (state: GameState) => ({
   ...state,
   ...initialState
@@ -109,6 +116,7 @@ const gameStateReducer = createReducer(
   on(penalizeButtonClicked, setWordInvalid),
   on(skipButtonClicked, incrementSkipCounter),
   on(skipButtonClicked, skipWord),
+  on(showGameResults, setShowGameResults)
 );
 
 export const gameFeature = createFeature({
@@ -122,6 +130,7 @@ export const {
   selectGameState,
   selectGameStarted,
   selectGameEnded,
+  selectShowGameResults,
   selectRemainingTime,
   selectSkipCount,
   selectGameLetters,

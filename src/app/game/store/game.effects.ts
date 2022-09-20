@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { filter, map, withLatestFrom } from 'rxjs';
+import { delay, filter, map, withLatestFrom } from 'rxjs';
 import { getGameLetters, getGameWords } from '../game.utils';
-import { gameComponentInitialized, gameEndedByCompletion, gameEndedByTime, gameTimerTick, gotGameLetters, gotGameWords, initializeRemainingTime, remainingWordIndicesGenerated } from './game.actions';
+import { gameComponentInitialized, gameEndedByCompletion, gameEndedByTime, gameTimerTick, gotGameLetters, gotGameWords, initializeRemainingTime, remainingWordIndicesGenerated, showGameResults } from './game.actions';
 import { allWords, alphabet } from '../words';
 import { correctButtonClicked, playAgainButtonClicked } from './game.ui.actions';
 import { selectRemainingTime, selectRemainingWordIndices } from './game.reducer';
@@ -67,6 +67,14 @@ export class GameEffects {
       withLatestFrom(this.store.select(selectRemainingTime)),
       filter( ([_, remainingTime]) => remainingTime <= 0 ),
       map( () => gameEndedByTime() )
+    )
+  );
+
+  showGameResults$ = createEffect(
+    () => this.actions$.pipe(
+      ofType(gameEndedByCompletion, gameEndedByTime),
+      delay(3000),
+      map( () => showGameResults() )
     )
   );
  

@@ -1,5 +1,4 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { GameStatus } from '../game.utils';
 import { GameWordDetails } from '../word.models';
 
 const computeScore = (correctWords: number, maxWords: number, dollarsPerCorrect: number, bonusIfAllCorrect: number): number =>
@@ -11,7 +10,6 @@ const computeScore = (correctWords: number, maxWords: number, dollarsPerCorrect:
 })
 export class ResultsSummaryComponent implements OnChanges {
 
-  @Input() gameStatus: GameStatus | null = null;
   @Input() gameWordDetails: GameWordDetails[] | null = null;
   @Input() remainingTime: number | null = null;
   @Input() skipCount: number | null = null;

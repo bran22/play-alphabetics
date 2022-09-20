@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, filter, interval, map, switchMap, takeUntil } from 'rxjs';
+import { BehaviorSubject, combineLatest, delay, filter, interval, map, switchMap, takeUntil, tap } from 'rxjs';
 import { gameComponentInitialized, gameTimerTick } from './store/game.actions';
 import { beginGameButtonClicked, playAgainButtonClicked } from './store/game.ui.actions';
-import { selectGameEnded, selectGameStarted, selectRemainingTime, selectRemainingWordIndices, selectSkipCount } from './store/game.reducer';
+import { selectGameEnded, selectGameStarted, selectRemainingTime, selectRemainingWordIndices, selectShowGameResults, selectSkipCount } from './store/game.reducer';
 import { selectCurrentWord, selectGameStatus, selectGameWordDetails } from './store/game.selectors';
 
 @Component({
@@ -20,6 +20,7 @@ export class GameComponent implements OnInit, OnDestroy {
   currentWord$ = this.store.select(selectCurrentWord);
   remainingTime$ = this.store.select(selectRemainingTime);
   skipCount$ = this.store.select(selectSkipCount);
+  showGameResults$ = this.store.select(selectShowGameResults);
   gameHasEnded$ = combineLatest([
     this.store.select(selectGameEnded),
     this.componentIsDestroyed$

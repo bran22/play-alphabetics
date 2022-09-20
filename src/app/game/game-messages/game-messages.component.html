@@ -11,3 +11,11 @@
     </div>
   </div>
 </ng-container>
+
+<ng-container *ngIf="gameStatus?.started && gameStatus?.ended">
+  <div class="clr-row">
+    <div class="clr-col">
+      <h1 class="center-text">Game Over!</h1>
+    </div>
+  </div>
+</ng-container>

@@ -36,3 +36,7 @@ export const gameEndedByTime = createAction(
 export const gameEndedByCompletion = createAction(
   '[Game Component] Game Ended By Completion'
 );
+
+export const showGameResults = createAction(
+  '[Game Component] Show Game Results'
+);
