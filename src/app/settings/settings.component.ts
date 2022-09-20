@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { range } from '~shared/utils';
-import { gameLengthInputChanged, numWordsInputChanged } from './store/settings.actions';
+import { gameLengthChanged, numWordsInputChanged } from './store/settings.actions';
 import { selectNumWords, selectTimerLength } from './store/settings.reducer';
 
 @Component({
@@ -30,7 +30,7 @@ export class SettingsComponent {
   }
 
   storeGameLength(value: string): void {
-    this.store.dispatch(gameLengthInputChanged({timerLength: +value}));
+    this.store.dispatch(gameLengthChanged({timerLength: +value}));
   }
 
   navigateHome(): void {

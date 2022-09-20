@@ -5,7 +5,7 @@ export const numWordsInputChanged = createAction(
   props<{numWords: number}>()
 );
 
-export const gameLengthInputChanged = createAction(
-  '[Settings Component] (Game Length Input) Changed',
+export const gameLengthChanged = createAction(
+  '[Settings Component] (Game Length Select Option) Changed',
   props<{timerLength: number}>()
 );
