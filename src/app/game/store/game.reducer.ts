@@ -123,6 +123,7 @@ export const {
   selectGameStarted,
   selectGameEnded,
   selectRemainingTime,
+  selectSkipCount,
   selectGameLetters,
   selectGameWords,
   selectCurrentWordIndex,

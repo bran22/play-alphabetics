@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, filter, interval, map, switchMap, takeUntil } from 'rxjs';
 import { gameComponentInitialized, gameTimerTick } from './store/game.actions';
 import { beginGameButtonClicked, playAgainButtonClicked } from './store/game.ui.actions';
-import { selectGameEnded, selectGameStarted, selectRemainingTime, selectRemainingWordIndices } from './store/game.reducer';
+import { selectGameEnded, selectGameStarted, selectRemainingTime, selectRemainingWordIndices, selectSkipCount } from './store/game.reducer';
 import { selectCurrentWord, selectGameStatus, selectGameWordDetails } from './store/game.selectors';
 
 @Component({
@@ -19,6 +19,7 @@ export class GameComponent implements OnInit, OnDestroy {
   gameWordDetails$ = this.store.select(selectGameWordDetails);
   currentWord$ = this.store.select(selectCurrentWord);
   remainingTime$ = this.store.select(selectRemainingTime);
+  skipCount$ = this.store.select(selectSkipCount);
   gameHasEnded$ = combineLatest([
     this.store.select(selectGameEnded),
     this.componentIsDestroyed$

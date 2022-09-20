@@ -1,7 +1,7 @@
 <ng-container *ngrxLet="gameStatus$ as gameStatus">  
   <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
 
-  <app-letter-row [wordDetails]="gameWordDetails$ | async"></app-letter-row>
+  <app-letter-row *ngIf="!gameStatus.ended" [wordDetails]="gameWordDetails$ | async"></app-letter-row>
 
   <ng-container *ngIf="!gameStatus.started">
     <br />
@@ -24,10 +24,12 @@
 
   <app-results-summary
     [gameStatus]="gameStatus"
-    [gameWordDetails]="gameWordDetails$ | async">
+    [gameWordDetails]="gameWordDetails$ | async"
+    [remainingTime]="remainingTime$ | async"
+    [skipCount]="skipCount$ | async">
   </app-results-summary>
 
-  <div class="clr-row" *ngIf="gameStatus?.ended">
+  <div class="clr-row" *ngIf="gameStatus.ended">
     <div class="clr-col center-elements">
       <button
         class="btn btn-primary"

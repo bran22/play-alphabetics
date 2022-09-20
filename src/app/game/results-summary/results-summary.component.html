@@ -1,7 +1,30 @@
 <ng-container *ngIf="gameStatus?.ended">
-  <h1>Game Over</h1>
+  
   <div class="clr-row">
     <div class="clr-col-12 clr-col-lg-10 clr-offset-lg-1 clr-col-xl-8 clr-offset-xl-2">
+      <h1>Game Results:</h1>
+      <table class="table table-vertical">
+        <tbody>
+          <tr>
+            <th>Remaining Time (sec)</th>
+            <td>{{remainingTime}}</td>
+          </tr>
+          <tr>
+            <th>Number of Skips:</th>
+            <td>{{skipCount}}</td>
+          </tr>
+          <tr>
+            <th>Total Score</th>
+            <th>${{score}}</th>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col-12 clr-col-lg-10 clr-offset-lg-1 clr-col-xl-8 clr-offset-xl-2">
+      <h1>Individual Word Results:</h1>
       <!-- <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1> -->
       <table class="table table-vertical">
         <tbody>
@@ -11,6 +34,15 @@
               <clr-icon shape="check" size="24" class="is-success" *ngIf="wordDetails?.correct"></clr-icon>
               <clr-icon shape="times" size="24" class="is-danger" *ngIf="wordDetails?.invalid"></clr-icon>
             </td>
+            <td class="success">{{wordDetails.correct ? '+$' + dollarsPerCorrectWord : ''}}</td>
+          </tr>
+          <tr>
+            <th>All Words Bonus</th>
+            <td>
+              <clr-icon shape="check" size="24" class="is-success" *ngIf="gotBonus"></clr-icon>
+              <clr-icon shape="times" size="24" class="is-danger" *ngIf="!gotBonus"></clr-icon>
+            </td>
+            <td class="success">{{gotBonus ? '+$' + bonusIfAllCorrect : ''}}</td>
           </tr>
         </tbody>
       </table>
