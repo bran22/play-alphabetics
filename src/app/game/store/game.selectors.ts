@@ -1,10 +1,10 @@
 import { createSelector } from '@ngrx/store';
 import { GameStatus } from '../game.utils';
 import { Letter, GameWordDetails } from '../word.models';
-import { selectCurrentWordIndex, selectGameEnded, selectGameLetters, selectGameStarted, selectGameWords, selectInvalidWordIndices, selectRemainingWordIndices } from './game.reducer';
+import { selectCurrentWordIndex, selectGameEnded, selectGameLetters, selectGameStarted, selectGameWords, selectInvalidWordIndices, selectRemainingWordIndices, selectShowGameResults } from './game.reducer';
 
-const getGameStatus = (started: boolean, ended: boolean): GameStatus => ({started, ended});
-export const selectGameStatus = createSelector(selectGameStarted, selectGameEnded, getGameStatus);
+const getGameStatus = (started: boolean, ended: boolean, showResults: boolean): GameStatus => ({started, ended, showResults});
+export const selectGameStatus = createSelector(selectGameStarted, selectGameEnded, selectShowGameResults, getGameStatus);
 
 const getCurrentWord = (gameWords: string[], currentWordIndex: number | null) => currentWordIndex !== null ? gameWords[currentWordIndex] : null;
 export const selectCurrentWord = createSelector(selectGameWords, selectCurrentWordIndex, getCurrentWord);

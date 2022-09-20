@@ -2,7 +2,8 @@ import { Letter, WordList } from './word.models';
 
 export type GameStatus = {
   started: boolean,
-  ended: boolean
+  ended: boolean,
+  showResults: boolean
 };
 
 export const getGameLetters = (numLetters: number, startingLetterIndex: number, alphabet: Letter[]) => alphabet.slice(startingLetterIndex, startingLetterIndex + numLetters);

@@ -3,7 +3,7 @@
     <button
       class="btn btn-outline"
       (click)="navigateHome()"
-      [disabled]="gameStatus.started && !gameStatus.ended">
+      [disabled]="gameStatus.started && !gameStatus.showResults">
       <clr-icon shape="home"></clr-icon>
       <span class="button-text">&nbsp;Home</span>
     </button>

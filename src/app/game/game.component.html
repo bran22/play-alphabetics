@@ -1,39 +1,37 @@
 <ng-container *ngrxLet="gameStatus$ as gameStatus">
-  <ng-container *ngrxLet="showGameResults$ as showGameResults">
-    <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
+  <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
 
-    <app-letter-row *ngIf="!showGameResults" [wordDetails]="gameWordDetails$ | async"></app-letter-row>
+  <app-letter-row *ngIf="!gameStatus.showResults" [wordDetails]="gameWordDetails$ | async"></app-letter-row>
 
-    <ng-container *ngIf="!gameStatus.started">
-      <br />
-      <div class="clr-row">
-        <div class="clr-col center-elements">
-          <button class="btn btn-primary" (click)="beginGame()">Start Game</button>
-        </div>
-      </div>
-    </ng-container>
-
-    <app-game-messages
-      *ngIf="!showGameResults"
-      [gameStatus]="gameStatus"
-      [currentWord]="currentWord$ | async"
-      [remainingTime]="remainingTime$ | async">
-    </app-game-messages>
-
-    <app-results-summary
-      *ngIf="showGameResults"
-      [gameWordDetails]="gameWordDetails$ | async"
-      [remainingTime]="remainingTime$ | async"
-      [skipCount]="skipCount$ | async">
-    </app-results-summary>
-
-    <div class="clr-row" *ngIf="showGameResults">
-      <br />
+  <ng-container *ngIf="!gameStatus.started">
+    <br />
+    <div class="clr-row">
       <div class="clr-col center-elements">
-        <button class="btn btn-primary" (click)="playAgain()">
-          <clr-icon shape="sync"></clr-icon>&nbsp;Play Again
-        </button>
+        <button class="btn btn-primary" (click)="beginGame()">Start Game</button>
       </div>
     </div>
   </ng-container>
+
+  <app-game-messages
+    *ngIf="!gameStatus.showResults"
+    [gameStatus]="gameStatus"
+    [currentWord]="currentWord$ | async"
+    [remainingTime]="remainingTime$ | async">
+  </app-game-messages>
+
+  <app-results-summary
+    *ngIf="gameStatus.showResults"
+    [gameWordDetails]="gameWordDetails$ | async"
+    [remainingTime]="remainingTime$ | async"
+    [skipCount]="skipCount$ | async">
+  </app-results-summary>
+
+  <div class="clr-row" *ngIf="gameStatus.showResults">
+    <br />
+    <div class="clr-col center-elements">
+      <button class="btn btn-primary" (click)="playAgain()">
+        <clr-icon shape="sync"></clr-icon>&nbsp;Play Again
+      </button>
+    </div>
+  </div>
 </ng-container>

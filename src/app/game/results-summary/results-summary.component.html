@@ -23,7 +23,6 @@
 <div class="clr-row">
   <div class="clr-col-12 clr-col-lg-10 clr-offset-lg-1 clr-col-xl-8 clr-offset-xl-2">
     <h1>Score Details:</h1>
-    <!-- <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1> -->
     <table class="table table-vertical">
       <tbody>
         <tr *ngFor="let wordDetails of gameWordDetails">
@@ -38,7 +37,6 @@
           <th>All Words Bonus</th>
           <td>
             <clr-icon shape="check" size="24" class="is-success" *ngIf="gotBonus"></clr-icon>
-            <clr-icon shape="times" size="24" class="is-danger" *ngIf="!gotBonus"></clr-icon>
           </td>
           <td class="success">{{gotBonus ? '+$' + bonusIfAllCorrect : ''}}</td>
         </tr>
