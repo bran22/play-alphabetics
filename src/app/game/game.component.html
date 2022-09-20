@@ -1,13 +1,7 @@
 <ng-container *ngrxLet="gameStatus$ as gameStatus">  
   <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
 
-  <ng-container *ngrxLet="gameLetters$ as letters">
-    <div class="clr-row" *ngIf="letters.length">
-      <div class="clr-col-4 clr-col-sm-3 clr-col-md" *ngFor="let letter of letters">
-        <app-letter-card [letterInfo]="letter"></app-letter-card>
-      </div>
-    </div>
-  </ng-container>
+  <app-letter-row [gameLetters]="gameLetters$ | async"></app-letter-row>
 
   <ng-container *ngIf="!gameStatus.started">
     <br />
@@ -22,19 +16,11 @@
     </div>
   </ng-container>
 
-  <ng-container *ngIf="gameStatus.started && !gameStatus.ended">
-    <div class="clr-row" *ngrxLet="currentWord$ as currentWord">
-      <div class="clr-col">
-        <h1 class="center-text">Current Word: {{currentWord | uppercase}}</h1>
-      </div>
-    </div>
-
-    <div class="clr-row" *ngIf="timer$ | async as remainingTime">
-      <div class="clr-col">
-        <h2 class="center-text">Remaining Time: {{remainingTime}}</h2>
-      </div>
-    </div>
-  </ng-container>
+  <app-game-messages
+    [gameStatus]="gameStatus"
+    [currentWord]="currentWord$ | async"
+    [remainingTime]="remainingTime$ | async">
+  </app-game-messages>
 
   <ng-container *ngIf="gameStatus.ended">
     <div class="clr-row">

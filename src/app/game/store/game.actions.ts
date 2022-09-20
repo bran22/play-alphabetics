@@ -10,6 +10,11 @@ export const remainingWordIndicesGenerated = createAction(
   props<{remainingWordIndices: number[]}>()
 );
 
+export const initializeRemainingTime = createAction(
+  '[Game Component] Initialized Remaining Time',
+  props<{remainingTime: number}>()
+);
+
 export const gotGameLetters = createAction(
   '[Game Component] Got Game Letters',
   props<{gameLetters: Letter[]}>()
@@ -20,6 +25,14 @@ export const gotGameWords = createAction(
   props<{gameWords: string[]}>()
 );
 
-export const gameEnded = createAction(
-  '[Game Component] Game Ended'
+export const gameTimerTick = createAction(
+  '[Game Component] Game Timer Ticked'
+);
+
+export const gameEndedByTime = createAction(
+  '[Game Component] Game Ended By Time'
+);
+
+export const gameEndedByCompletion = createAction(
+  '[Game Component] Game Ended By Completion'
 );

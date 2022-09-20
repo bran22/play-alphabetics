@@ -1,0 +1,5 @@
+<div class="clr-row" *ngIf="gameLetters && gameLetters.length">
+  <div class="clr-col-4 clr-col-sm-3 clr-col-md" *ngFor="let letter of gameLetters">
+    <app-letter-card [letterInfo]="letter"></app-letter-card>
+  </div>
+</div>

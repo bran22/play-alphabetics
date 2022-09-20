@@ -1,5 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameEnded, gameComponentInitialized } from './game.actions';
+import { gotGameLetters, gotGameWords, remainingWordIndicesGenerated, gameComponentInitialized, initializeRemainingTime, gameTimerTick, gameEndedByTime, gameEndedByCompletion } from './game.actions';
 import { beginGameButtonClicked, correctButtonClicked, penalizeButtonClicked, playAgainButtonClicked, skipButtonClicked } from './game.ui.actions';
 import { Letter } from '../word.models';
 import { findNextRemainingIndex } from '../game.utils';
@@ -13,6 +13,7 @@ export interface GameState {
   invalidWordIndices: number[],
   currentWordIndex: number | null,
   skipCount: number,
+  remainingTime: number,
 }
 
 export const initialState: GameState = {
@@ -24,6 +25,7 @@ export const initialState: GameState = {
   invalidWordIndices: [],
   currentWordIndex: null,
   skipCount: 0,
+  remainingTime: 0,
 };
 
 const startGame = (state: GameState): GameState => ({
@@ -41,6 +43,16 @@ const endGame = (state: GameState): GameState => ({
 const setRemainingWordIndices = (state: GameState, {remainingWordIndices}: {remainingWordIndices: number[]}) => ({
   ...state,
   remainingWordIndices
+});
+
+const setRemainingTime = (state: GameState, {remainingTime}: {remainingTime: number}) => ({
+  ...state,
+  remainingTime
+});
+
+const decrementRemainingTime = (state: GameState) => ({
+  ...state,
+  remainingTime: state.remainingTime - 1
 });
 
 const setGameLetters = (state: GameState, {gameLetters}: {gameLetters: Letter[]}) => ({
@@ -85,8 +97,11 @@ const gameStateReducer = createReducer(
   initialState,
   on(gameComponentInitialized, resetGame),
   on(playAgainButtonClicked, resetGame),
+  on(initializeRemainingTime, setRemainingTime),
+  on(gameTimerTick, decrementRemainingTime),
   on(beginGameButtonClicked, startGame),
-  on(gameEnded, endGame),
+  on(gameEndedByCompletion, endGame),
+  on(gameEndedByTime, endGame),
   on(remainingWordIndicesGenerated, setRemainingWordIndices),
   on(gotGameLetters, setGameLetters),
   on(gotGameWords, setGameWords),
@@ -107,6 +122,7 @@ export const {
   selectGameState,
   selectGameStarted,
   selectGameEnded,
+  selectRemainingTime,
   selectGameLetters,
   selectGameWords,
   selectCurrentWordIndex,

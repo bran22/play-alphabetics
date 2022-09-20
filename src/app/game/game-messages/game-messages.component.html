@@ -1,0 +1,13 @@
+<ng-container *ngIf="gameStatus?.started && !gameStatus?.ended">
+  <div class="clr-row">
+    <div class="clr-col">
+      <h1 class="center-text">Current Word: {{currentWord | uppercase}}</h1>
+    </div>
+  </div>
+
+  <div class="clr-row">
+    <div class="clr-col">
+      <h2 class="center-text">Remaining Time: {{remainingTime}}</h2>
+    </div>
+  </div>
+</ng-container>

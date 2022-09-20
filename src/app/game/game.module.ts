@@ -9,11 +9,15 @@ import { GameEffects } from './store/game.effects';
 import { LetterCardModule } from '~shared/components/letter-card/letter-card.module';
 import { ClarityModule } from '@clr/angular';
 import { GameControlButtonsComponent } from './game-control-buttons/game-control-buttons.component';
+import { LetterRowComponent } from './letter-row/letter-row.component';
+import { GameMessagesComponent } from './game-messages/game-messages.component';
 
 @NgModule({
   declarations: [
     GameComponent,
-    GameControlButtonsComponent
+    GameControlButtonsComponent,
+    LetterRowComponent,
+    GameMessagesComponent
   ],
   imports: [
     CommonModule,
