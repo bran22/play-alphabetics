@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { LetterInfo } from 'src/app/game/word.models';
+import { GameWordDetails } from 'src/app/game/word.models';
 
 @Component({
   selector: 'app-letter-card',
@@ -8,7 +8,7 @@ import { LetterInfo } from 'src/app/game/word.models';
 })
 export class LetterCardComponent implements OnInit {
 
-  @Input() letterInfo: LetterInfo | null = null;
+  @Input() wordDetails: GameWordDetails | null = null;
 
   constructor() { }
 

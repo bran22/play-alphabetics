@@ -11,13 +11,15 @@ import { ClarityModule } from '@clr/angular';
 import { GameControlButtonsComponent } from './game-control-buttons/game-control-buttons.component';
 import { LetterRowComponent } from './letter-row/letter-row.component';
 import { GameMessagesComponent } from './game-messages/game-messages.component';
+import { ResultsSummaryComponent } from './results-summary/results-summary.component';
 
 @NgModule({
   declarations: [
     GameComponent,
     GameControlButtonsComponent,
     LetterRowComponent,
-    GameMessagesComponent
+    GameMessagesComponent,
+    ResultsSummaryComponent
   ],
   imports: [
     CommonModule,

@@ -5,8 +5,9 @@ export type WordList = {
   [key in Letter]: string[];
 };
 
-export interface LetterInfo {
-  letter: Letter,
+export interface GameWordDetails {
+  word: string,
+  firstLetter: Letter,
   correct: boolean,
   current: boolean,
   invalid: boolean,

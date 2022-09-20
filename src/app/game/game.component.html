@@ -1,7 +1,7 @@
 <ng-container *ngrxLet="gameStatus$ as gameStatus">  
   <app-game-control-buttons [gameStatus]="gameStatus"></app-game-control-buttons>
 
-  <app-letter-row [gameLetters]="gameLetters$ | async"></app-letter-row>
+  <app-letter-row [wordDetails]="gameWordDetails$ | async"></app-letter-row>
 
   <ng-container *ngIf="!gameStatus.started">
     <br />
@@ -22,23 +22,20 @@
     [remainingTime]="remainingTime$ | async">
   </app-game-messages>
 
-  <ng-container *ngIf="gameStatus.ended">
-    <div class="clr-row">
-      <div class="clr-col center-elements">
-        <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1>
-      </div>
-    </div>
+  <app-results-summary
+    [gameStatus]="gameStatus"
+    [gameWordDetails]="gameWordDetails$ | async">
+  </app-results-summary>
 
-    <div class="clr-row">
-      <div class="clr-col center-elements">
-        <button
-          class="btn btn-primary"
-          (click)="playAgain()">
-          <clr-icon shape="sync"></clr-icon>
-          Play Again
-        </button>
-      </div>
+  <div class="clr-row" *ngIf="gameStatus?.ended">
+    <div class="clr-col center-elements">
+      <button
+        class="btn btn-primary"
+        (click)="playAgain()">
+        <clr-icon shape="sync"></clr-icon>
+        Play Again
+      </button>
     </div>
-  </ng-container>
+  </div>
 
 </ng-container>

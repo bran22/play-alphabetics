@@ -1,0 +1,19 @@
+<ng-container *ngIf="gameStatus?.ended">
+  <h1>Game Over</h1>
+  <div class="clr-row">
+    <div class="clr-col-12 clr-col-lg-10 clr-offset-lg-1 clr-col-xl-8 clr-offset-xl-2">
+      <!-- <h1 class="center-text" *ngrxLet="remainingIndices$ as remaining">{{remaining.length ? 'Game Over' : 'You Won!'}}</h1> -->
+      <table class="table table-vertical">
+        <tbody>
+          <tr *ngFor="let wordDetails of gameWordDetails">
+            <th>{{wordDetails.word}}</th>
+            <td>
+              <clr-icon shape="check" size="24" class="is-success" *ngIf="wordDetails?.correct"></clr-icon>
+              <clr-icon shape="times" size="24" class="is-danger" *ngIf="wordDetails?.invalid"></clr-icon>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</ng-container>

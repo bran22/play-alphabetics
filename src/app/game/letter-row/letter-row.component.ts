@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { LetterInfo } from '../word.models';
+import { GameWordDetails } from '../word.models';
 
 @Component({
   selector: 'app-letter-row',
@@ -8,7 +8,7 @@ import { LetterInfo } from '../word.models';
 })
 export class LetterRowComponent {
 
-  @Input() gameLetters: LetterInfo[] | null = null;
+  @Input() wordDetails: GameWordDetails[] | null = null;
 
   constructor() { }
 
