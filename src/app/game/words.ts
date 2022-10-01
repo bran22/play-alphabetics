@@ -51,24 +51,34 @@ export const allWords: WordList = {
   ],
   h: [
     'hippo', 'hotel', 'hearty', 'harp', 'halo', 'hook', 'harbor', 'harmony', 'heard', 'hive', 'hound', 'hatred', 'heated', 'hereby', 'hunger', 'holding', 'hoops',
-    'hubris', 'halved', 'handbag', 'hangar', 'hardship', 'hasty', 'header', 'hefty', 'helium', 'herself', 'himself', 'honesty', 'horse', 'hyphen'
+    'hubris', 'halved', 'handbag', 'hangar', 'hardship', 'hasty', 'header', 'hefty', 'helium', 'herself', 'himself', 'honesty', 'horse', 'hyphen', 'hat', 'hop',
+    'hint', 'hall', 'hallway', 'honk', 'heap', 'hulk', 'hyper', 'hype', 'harsh', 'heist', 'hiking', 'hour', 'humor', 'human', 'humanities', 'humorous', 'hobby',
+    'hunch', 'hungry', 'hardly', 'harass', 'hassle', 'hunter', 'helmet', 'heresy', 'here', 'hidden', 'hiding', 'host', 'hostel', 'hummus', 'hymn', 'hum', 'humble',
+    'hypnotize', 'health', 'healthy', 'height', 'humidity', 'humid', 'hydrate'
   ],
   i: [
     'iguana', 'igloo', 'impulse', 'iced', 'isle', 'image', 'inbox', 'immune', 'illegal', 'itchy', 'idiot', 'impact', 'injury', 'itself', 'immersion', 'inhabit',
-    'integer', 'iron', 'itemize', 'isolate', 'ignite', 'illusion', 'intimidate', 'impolite', 'industry', 'infinity', 'instincts', 'intruder', 'ignore'
+    'integer', 'iron', 'itemize', 'isolate', 'ignite', 'illusion', 'intimidate', 'impolite', 'industry', 'infinity', 'instincts', 'intruder', 'ignore', 'inch',
+    'item', 'irony', 'input', 'intake', 'icicle', 'idle', 'imagine', 'income', 'inhale', 'ingot', 'insane', 'intention', 'invoke', 'interrupt', 'issue', 'ignite',
+    'imitate', 'impale', 'imply', 'impressed', 'indent', 'index', 'indigo', 'infernal', 'insist', 'inquire', 'infant', 'invite', 'ivy', 'immense', 'improve', 'inert',
+    'inertia', 'influx', 'infringe', 'initial', 'innocent', 'innovate', 'insert', 'intended', 'intentional', 'invade', 'invent', 'invoice', 'isolated', 'iterate'
   ],
   j: [
     'jester', 'jaguar', 'junction', 'jazz', 'joke', 'just', 'juice', 'jumbo', 'jigsaw', 'jumped', 'juggle', 'jungle', 'jackpot', 'jammed', 'jersey', 'jogging',
-    'jolt', 'justice', 'jewelry', 'joint', 'juvenile', 'junk', 'jellyfish', 'jeopardize', 'journalist', 'jargon', 'jolly', 'junior', 'journal', 'judgment'
+    'jolt', 'justice', 'jewelry', 'joint', 'juvenile', 'junk', 'jellyfish', 'jeopardize', 'journalist', 'jargon', 'jolly', 'junior', 'journal', 'judgment',
+    'jest', 'jog', 'jury', 'jump', 'jade', 'jerky', 'jelly', 'jewel', 'juicy', 'jam', 'jiggle', 'jogger', 'joyful', 'joyous', 'justify', 'javelin', 'jostle',
+    'jumbled', 'junior', 'jackfruit', 'jasmine', 'jeopardy', 'jingle', 'joined', 'jubilee', 'jumpsuit', 'jealous', 'junkyard', 'jailer', 'jail', 'jailbreak'
   ],
   k: [
     'king', 'kilogram', 'knife', 'kind', 'keen', 'knees', 'key', 'kite', 'kitchen', 'karaoke', 'keyboard', 'ketchup', 'knock', 'kale', 'kelp', 'kidnap', 'kick',
-    'knot', 'knowledge', 'kimchi', 'kinetic', 'keratin', 'koala', 'kazoo', 'kraken', 'karate', 'knit', 'kabob', 'kaboom', 'kayak', 'kiosk'
+    'knot', 'knowledge', 'kimchi', 'kinetic', 'keratin', 'koala', 'kazoo', 'kraken', 'karate', 'knit', 'kabob', 'kaboom', 'kayak', 'kiosk',  'kid', 'karma', 'khaki',
+    'kettle', 'kneel', 'knocking', 'katana', 'keypad', 'keyring', 'kibble', 'killer', 'knob', 'kimono', 'krill', 'kernel', 'keynote', 'kidney', 'kilometer', 'knight',
+    'keg', 'kerosene', 'kindness', 'knockout', 'knockoff', 'kaleidoscope'
   ],
   l: [
     'lion', 'llama', 'laser', 'lamp', 'laws', 'leapt', 'lucky', 'learned', 'lobby', 'lounge', 'lately', 'lawyer', 'least', 'levitate', 'liquid', 'loaf', 'lottery',
     'luxurious', 'launch', 'laundry', 'linear', 'location', 'longbow', 'luggage', 'lyrics', 'label', 'leggings', 'lavender', 'leafy', 'legendary', 'liberate',
-    'lobster'
+    'lobster', 'lair', 'lint', 'lip', 'load', 'loan', 'loud', 'lane', 'lapel', 'laugh', 'lava', 'light', 'local', 'loopy', 'lousy', 'lure', 'late', 'league', 'latch'
   ],
   m: [
     'monster', 'medicine', 'melt', 'march', 'mark', 'mean', 'major', 'mild', 'minty', 'money', 'moving', 'motivate', 'myth', 'magical', 'mango', 'mayhem', 'merge',
